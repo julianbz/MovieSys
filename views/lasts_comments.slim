@@ -1,0 +1,150 @@
+doctype html
+html
+  head
+    meta charset="utf-8" /
+    meta content="IE=edge" http-equiv="X-UA-Compatible" /
+    title AdminLTE 2 | Advanced form elements
+    /! Tell the browser to be responsive to screen width
+    meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" /
+    /! Bootstrap 3.3.7
+    link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" /
+    /! Font Awesome
+    link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" /
+    /! Ionicons
+    link href="bower_components/Ionicons/css/ionicons.min.css" rel="stylesheet" /
+    /! bootstrap datepicker
+    link href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet" /
+    /! Theme style
+    link href="dist/css/AdminLTE.min.css" rel="stylesheet" /
+    link href="dist/css/skins/_all-skins.min.css" rel="stylesheet" /
+    link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" rel="stylesheet" /
+  body.hold-transition.skin-red.sidebar-mini
+    .wrapper
+      header.main-header
+        a.logo href="index2.html"
+          span.logo-mini
+            b Mv
+            | Sy
+          span.logo-lg
+            b Movies
+            | Sys
+
+        nav.navbar.navbar-static-top
+          ul.nav.navbar-nav
+            li.dropdown.notifications-menu
+              a  href="/" All movies
+            li.dropdown.notifications-menu
+              a  href="/lasts_movies" Lasts movies
+            li.dropdown.notifications-menu
+              a  href="/lasts_comments" Lasts comments
+
+      aside.main-sidebar
+        section.sidebar
+
+          ul.sidebar-menu data-widget="tree"
+            li.header
+              h4
+                p
+                  | CATEGORIES
+                  a.i.fa.fa-plus.pull-right href="/category_new"
+            - @categories.to_a.each do |category|
+              li
+                a href="/category/#{category.id}"
+                  i.fa.fa-film
+                  span = category.name
+
+      .content-wrapper style="min-height: 558px;height: 900px;"
+        section.content-header
+          h1
+            | Lasts comments
+        br
+        .col-md-9
+          .nav-tabs-custom
+            .tab-content
+              #activity.tab-pane
+
+              #timeline.tab-pane.active
+                ul.timeline.timeline-inverse
+                  br
+                  - @lasts_comments.to_a.each do |comment|
+                    li
+                      i.fa.fa-comment.bg-blue
+                      .timeline-item
+                        span.time
+                          i.fa.fa-clock-o
+                          | #{comment.created_at}
+                        h3.timeline-header.no-border
+                          row
+                            p style="color:#3c8dbc;" #{comment.name} commented:
+
+                          pre #{comment.comment}
+                          p.pull-left style="color:grey" On "#{comment.movie.name}" movie
+                          a style="color:grey" href="/category/#{comment.movie.category.id}/movie/#{comment.movie.id}#comments"
+                            span.pull-right  See comment
+                          br
+                  br
+                  li
+                    i.fa.fa-clock-o.bg-gray
+
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+
+    footer.main-footer
+      .pull-right.hidden-xs
+        b Version
+        | 1.0
+      strong
+        | Copyright © 2017-2018
+        a href=""  Julian Baez
+
+      | Derechos reservados
+    /! /.control-sidebar
+    /!
+      | Add the sidebar's background. This div must be placed
+      | immediately after the control sidebar
+    .control-sidebar-bg
+    /! ./wrapper
+    /! jQuery 3
+    script src="bower_components/jquery/dist/jquery.min.js"
+    /! Bootstrap 3.3.7
+    script src="bower_components/bootstrap/dist/js/bootstrap.min.js"
+    /! InputMask
+    script src="plugins/input-mask/jquery.inputmask.js"
+    script src="plugins/input-mask/jquery.inputmask.date.extensions.js"
+    script src="plugins/input-mask/jquery.inputmask.extensions.js"
+    /! bootstrap datepicker
+    script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"
+    script src="dist/js/adminlte.min.js"
+    /! AdminLTE for demo purposes
+    script src="dist/js/demo.js"
+    /! Page script
+    javascript:
+      | $(function () {
+
+        /!/Datemask dd/mm/yyyy
+        | $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+
+        /!/Date picker
+        | $('#datepicker').datepicker({
+          | autoclose: true
+        | })
+
+      | })
